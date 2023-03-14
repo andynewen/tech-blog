@@ -34,6 +34,12 @@ SO THAT I can publish articles, blog posts, and my thoughts and opinions
 
 * Node.js provides a set of asynchronous I/O primitives in its standard library that prevent JavaScript code from blocking.
 
+**3. [Sequelize](https://sequelize.org/)** : 
+* Sequelize is a modern TypeScript and Node.js ORM for Oracle, Postgres, MySQL, MariaDB, SQLite and SQL Server, and more. Featuring solid transaction support, relations, eager and lazy loading, read replication and more.
+
+**3. [Handlebars.js](https://handlebarsjs.com/)** : 
+* Handlebars. js is a Javascript library used to create reusable webpage templates. The templates are combination of HTML, text, and expressions. The expressions are included in the html document and surrounded by double curly braces.
+
 ## Usage
 
 
