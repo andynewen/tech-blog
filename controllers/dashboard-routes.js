@@ -4,32 +4,25 @@ const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, (req, res) => {
-  console.log(req.session);
-  console.log('======================');
   Post.findAll({
     where: {
-      user_id: req.session.user_id
+      user_id: req.session.user_id,
     },
-    attributes: [
-      'id',
-      'post_url',
-      'title',
-      'created_at',
-    ],
+    attributes: ['id', 'title', 'created_at', 'post_content'],
     include: [
       {
         model: Comment,
         attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
         include: {
           model: User,
-          attributes: ['username']
-        }
+          attributes: ['username'],
+        },
       },
       {
         model: User,
-        attributes: ['username']
-      }
-    ]
+        attributes: ['username'],
+      },
+    ],
   })
     .then(dbPostData => {
       const posts = dbPostData.map(post => post.get({ plain: true }));
@@ -43,26 +36,21 @@ router.get('/', withAuth, (req, res) => {
 
 router.get('/edit/:id', withAuth, (req, res) => {
   Post.findByPk(req.params.id, {
-    attributes: [
-      'id',
-      'post_url',
-      'title',
-      'created_at',
-    ],
+    attributes: ['id', 'title', 'created_at', 'post_content'],
     include: [
       {
         model: Comment,
         attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
         include: {
           model: User,
-          attributes: ['username']
-        }
+          attributes: ['username'],
+        },
       },
       {
         model: User,
-        attributes: ['username']
-      }
-    ]
+        attributes: ['username'],
+      },
+    ],
   })
     .then(dbPostData => {
       if (dbPostData) {
@@ -70,7 +58,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
 
         res.render('edit-post', {
           post,
-          loggedIn: true
+          loggedIn: true,
         });
       } else {
         res.status(404).end();
